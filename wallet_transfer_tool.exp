@@ -1,0 +1,29 @@
+#!/usr/bin/expect
+
+set timeout 20
+
+# Updated destination wallet address
+set dest_wallet "PUTWALLETADDYHERE"
+
+# Define source wallets and their corresponding transfer amounts
+set transfers {
+    {"walletname" 0.32}
+    {"walletname" 0.11}
+    {"walletname_ADD_MORE_VALUES_AS_NECESSARY" 0.11}
+}
+
+set password "PUTYOURPASSWORDHERE"
+
+foreach transfer $transfers {
+    set wallet_name [lindex $transfer 0]
+    set wallet_hotkey [lindex $transfer 0]
+    set amount [lindex $transfer 1]
+
+    spawn btcli wallet transfer --dest $dest_wallet --amount $amount --wallet.name $wallet_name --wallet.hotkey $wallet_name
+
+    expect "Enter password to unlock key:"
+    send "$password\r"
+    expect "for fee: "
+    send "y\r"
+    expect eof
+}
