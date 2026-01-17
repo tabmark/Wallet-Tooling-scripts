@@ -15,6 +15,10 @@ ENV/
 *.sqlite
 *.sqlite3
 
+# Data files
+scraped_*.json
+spike_analysis_results.json
+
 # Test files
 test_*.py
 test_*.exp
